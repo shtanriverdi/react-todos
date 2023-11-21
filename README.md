@@ -1,9 +1,6 @@
 # React + Vite Todo List App
 
-This is a simple todo list web app written in React.js.
-
-## Sample Video:
-![s](https://github.com/shtanriverdi/react-todos/assets/36234545/974a34e3-d166-4506-a34e-aa3cfeae69de)
+This is a simple to-do list web app written in React.js.
 
 ## Screenshot:
-![he](https://github.com/shtanriverdi/react-todos/assets/36234545/2230f97d-1783-4637-b951-05cc2fee3d83)
+![Screenshot 2023-11-21 101928](https://github.com/shtanriverdi/react-todos/assets/36234545/3543e535-49c7-42ef-ad0d-87027cbc1182)
