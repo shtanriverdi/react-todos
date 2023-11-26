@@ -7,7 +7,7 @@ const comp = function (A, B) {
     //     return -1;
     // }
     // return 1;
-    return A.priority - B.priority; // Better option to sort in ASC order
+    return B.priority - A.priority; // Better option to sort in ASC order
 };
 
 export { arraysEqual, comp };

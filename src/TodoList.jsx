@@ -53,7 +53,6 @@ export default function TodoList() {
     const addTodo = (newItem) => {
         setTodos(prevTodos => {
             const updatedList = [{ ...newItem, id: crypto.randomUUID() }, ...prevTodos];
-            updatedList.sort(comp);
             return updatedList;
         });
     }
