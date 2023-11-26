@@ -3,6 +3,7 @@ import TodoItem from './TodoItem.jsx';
 import { useEffect, useState } from 'react';
 import AddTodo from './AddTodo.jsx';
 import Box from '@mui/material/Box';
+import { comp, arraysEqual } from './utils.js';
 
 const getInitialData = () => {
     const initData = JSON.parse(localStorage.getItem("todos"));
@@ -25,6 +26,18 @@ export default function TodoList() {
         });
     }
 
+    const makeUrgent = (id) => {
+        setTodos(prevTodos => {
+            const updatedTodos = prevTodos.map(todo => {
+                if (todo.id === id) {
+                    return { ...todo, priority: 3 };
+                }
+                return todo;
+            });
+            return updatedTodos;
+        });
+    }
+
     const toggleTodo = (id) => {
         setTodos(prevTodos => {
             return prevTodos.map(todo => {
@@ -37,15 +50,23 @@ export default function TodoList() {
         });
     };
 
-
     const addTodo = (newItem) => {
         setTodos(prevTodos => {
-            return [{ ...newItem, id: crypto.randomUUID() }, ...prevTodos]
+            const updatedList = [{ ...newItem, id: crypto.randomUUID() }, ...prevTodos];
+            updatedList.sort(comp);
+            return updatedList;
         });
     }
 
     // Everytime todos state is changed, save to localstorage
     useEffect(() => {
+        // Sort the todos
+        const sortedTodos = [ ...todos ].sort(comp); // Updates the stated with sorted list
+        // Avoid infinite re-render, render only if we really changed the todos array!
+        if (!arraysEqual(sortedTodos, todos)) {
+            setTodos(sortedTodos);
+        }
+
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
 
@@ -63,6 +84,7 @@ export default function TodoList() {
                         item={item}
                         onDelete={() => removeTodo(item.id)}
                         onToggle={() => toggleTodo(item.id)}
+                        onUrgent={() => makeUrgent(item.id)}
                     />
                 )
             }

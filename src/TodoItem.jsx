@@ -5,10 +5,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { DeleteOutline } from '@mui/icons-material';
+import { DeleteOutline, EditCalendar } from '@mui/icons-material';
 import Rating from './RatingSection';
 
-export default function TodoItem({ item, onDelete, onToggle }) {
+export default function TodoItem({ item, onDelete, onToggle, onUrgent }) {
     const labelId = item.id;
     const listItemStyle = {
         bgcolor: item.backgroundColor,
@@ -21,13 +21,21 @@ export default function TodoItem({ item, onDelete, onToggle }) {
             sx={listItemStyle}
             key={item.id}
             secondaryAction={
-                <IconButton
-                    onClick={() => onDelete(item.id)}
-                    edge="end"
-                    aria-label="comments"
-                >
-                    <DeleteOutline />
-                </IconButton>
+                <>
+                    <IconButton
+                        onClick={() => onDelete(item.id)}
+                        edge="end"
+                        aria-label="comments"
+                    >
+                        <DeleteOutline />
+                    </IconButton>
+                    <IconButton
+                        onClick={() => onUrgent(item.id)}
+                        edge="end"
+                        aria-label="comments"
+                    >
+                        <EditCalendar />
+                    </IconButton></>
             }
             disablePadding
         >
